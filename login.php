@@ -1,94 +1,85 @@
 <?php
-include "config/koneksi.php";
 session_start();
+include "config/koneksi.php";
+
+if(isset($_POST['login'])){
+
+    $Username = $_POST['Username'];
+    $Password = $_POST['Password'];
+
+    if(empty($Username) || empty($Password)){
+        $error = "Data tidak boleh kosong!";
+    } else {
+
+        $query = mysqli_query($koneksi, "SELECT * FROM users WHERE username='$Username' AND password='$Password'");
+
+        if(!$query){
+            die("Query Error: " . mysqli_error($koneksi));
+        }
+
+        if(mysqli_num_rows($query) > 0){
+
+            $data = mysqli_fetch_array($query);
+
+            $_SESSION['Username'] = $data['username'];
+            $_SESSION['role'] = $data['role'];
+
+            header("location:index.php");
+            exit;
+
+        } else {
+            $error = "Username atau Password salah!";
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Log in</title>
-  
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css? family=Source+Sans+Pro: 300, 400, 4001,700&display=fallback">
-  <!-- Font Awesome -->
+  <title>Login</title>
+
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-  <!-- icheck bootstrap -->
-  <link rel="stylesheet" href="plugins/icheck-bootstrap/
-  icheck-bootstrap.min.css">
-  <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
-  </head>
+</head>
 <body class="hold-transition login-page">
+
 <div class="login-box">
   <div class="login-logo">
-    <a href="#"><b>Admin</b>LTE</a>
+    <b>LOGIN</b>
   </div>
-  <!-- /.login-logo -->
+
   <div class="card">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">Sign in to start your session</p>
-<form action="#" method="post">
-  <div class="input-group mb-3">
-    <input type="text" name="Username" id="Username" class="form-control" placeholder="Username">
-    <div class="input-group-append">
-      <div class="input-group-text">
-        <span class="fas fa-envelope"></span>
-      </div>
-    </div>
-  </div>
 
-  <div class="input-group mb-3">
-    <input type="password" name="Password" id="Password" class="form-control" placeholder="Password">
-    <div class="input-group-append">
-      <div class="input-group-text">
-        <span class="fas fa-lock"></span>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    
-    <!-- /.col -->
-    <div class="col-12">
-      <input type="submit" name="login" value="Login" class="btn btn-primary btn-block">
-    </div>
-    <!-- /.col -->
-  </div>
-</form>
-</div>
-<!-- /.login-card-body -->
-</div>
-</div>
-<!-- /.login-box -->
+      <p class="login-box-msg">Silakan Login</p>
 
-<!-- jQuery -->
+      <?php if(isset($error)){ ?>
+        <div class="alert alert-danger"><?php echo $error; ?></div>
+      <?php } ?>
+
+      <form method="post">
+        <div class="input-group mb-3">
+          <input type="text" name="Username" class="form-control" placeholder="Username">
+        </div>
+
+        <div class="input-group mb-3">
+          <input type="password" name="Password" class="form-control" placeholder="Password">
+        </div>
+
+        <button type="submit" name="login" class="btn btn-primary btn-block">
+          Login
+        </button>
+      </form>
+
+    </div>
+  </div>
+</div>
+
 <script src="plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
+
 </body>
 </html>
-  <?php
-    if(isset($_POST['Username'])) {
-        $Username = $_POST['Username'];
-        $Password = $_POST['Password'];
-
-        if(empty($Username) || empty($Password)) {
-            echo "Data Tidak Boleh kosong";
-        } else {
-            $userquery = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM admin WHERE Username = '$Username' AND Password = '$Password' "));
-            if($userquery) {
-                $_SESSION['level'] = 'admin';
-                $_SESSION['Username'] = $Username;
-        header("location:index.php");
-            } else {
-          echo '<div class="alert alert-danger alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <h5><i class="icon fas fa-ban"></i> Alert!</h5>
-                        Login gagal
-                      </div>';
-              }
-          }
-      }
-  ?>
