@@ -2,13 +2,10 @@
   session_start();
   require_once("config/koneksi.php");
   if(isset($_SESSION['Username'])){
+    $role = isset($_SESSION['level']) ? $_SESSION['level'] : '';
+    $username = isset($_SESSION['Username']) ? $_SESSION['Username'] : 'User';
 ?>
 <!DOCTYPE html>
-<!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -104,51 +101,65 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+          <?php if ($role === 'guru' || $role === 'admin'): ?>
           <li class="nav-item menu-open">
             <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon fas fa-chalkboard-teacher"></i>
               <p>
-                Master
+                Akses Guru
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link active">
+                <a href="guru_profil.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Mata Pelajaran</p>
+                  <p>Profil</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="guru_kelas.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Guru</p>
+                  <p>Kelas</p>
                 </a>
               </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Transaksi
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link active">
+                <a href="guru_jadwal.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Jadwal</p>
                 </a>
               </li>
             </ul>
           </li>
+          <?php endif; ?>
+          <?php if ($role === 'siswa' || $role === 'admin'): ?>
+          <li class="nav-item menu-open">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fas fa-user-graduate"></i>
+              <p>
+                Akses Siswa
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="siswa_profil.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Profil</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="siswa_jadwal.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Jadwal</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <?php endif; ?>
           <li class="nav-item">
             <a href="logout.php" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+              <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>
                 Logout
               </p>
@@ -168,12 +179,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Starter Page</h1>
+            <h1 class="m-0">Dashboard</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Starter Page</li>
+              <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+              <li class="breadcrumb-item active">Dashboard</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -191,10 +202,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <h5 class="card-title">Card title</h5>
 
                 <p class="card-text">
-                  Selamat Datang di Sistem Jadwal Guru pada SMA/SMK XYZ
+                  Selamat Datang, <strong><?= htmlspecialchars($username) ?></strong>.<br>
+                  Anda login sebagai <strong><?= htmlspecialchars(ucfirst($role ?: 'Pengguna')) ?></strong>.
                 </p>
-
-                
               </div>
             </div>
 
@@ -242,10 +252,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="dist/js/adminlte.min.js"></script>
 </body>
 </html>
-</body>
-</html>
 <?php
-  }else{
-  echo"<meta http-equiv='refresh' content='0 url =login.php'>";
+  } else {
+    echo "<meta http-equiv='refresh' content='0; url=login.php'>";
   }
 ?>

@@ -82,10 +82,11 @@ if (isset($_POST['username'])) {
         ));
 
         if ($query) {
-            $_SESSION['level'] = 'admin';
-            $_SESSION['Username'] = $username;
+            $_SESSION['level'] = isset($query['Role']) ? $query['Role'] : 'admin';
+            $_SESSION['Username'] = $query['Username'];
 
-            header("location:index.php");
+            header("Location: index.php");
+            exit;
         } else {
             echo '<div class="alert alert-danger alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
