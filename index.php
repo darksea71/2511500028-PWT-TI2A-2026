@@ -101,6 +101,31 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <?php if ($role === 'admin' || $role === 'admin'): ?>
+          <li class="nav-item menu-open">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fas fa-chalkboard-teacher"></i>
+              <p>
+                Master
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="index.php?page=mapel" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Mata Pelajaran</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="guru_kelas.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Guru</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <?php endif; ?>
           <?php if ($role === 'guru' || $role === 'admin'): ?>
           <li class="nav-item menu-open">
             <a href="#" class="nav-link active">
@@ -202,8 +227,20 @@
                 <h5 class="card-title">Card title</h5>
 
                 <p class="card-text">
-                  Selamat Datang, <strong><?= htmlspecialchars($username) ?></strong>.<br>
-                  Anda login sebagai <strong><?= htmlspecialchars(ucfirst($role ?: 'Pengguna')) ?></strong>.
+                  <?php
+                    if (isset($_GET['page'])) {
+                        $page = $_GET['page'];
+                    } else {
+                        $page = "";
+                    }
+                    if ($page == "") {
+                        include "page/dashboard.php";
+                    } elseif (!file_exists("page/$page.php")) {
+                        echo "File Tidak Ditemukan";
+                    } else {
+                        include "page/$page.php";
+                    }
+                  ?>
                 </p>
               </div>
             </div>
