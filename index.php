@@ -118,9 +118,34 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="index.php?page=kelas" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Kelas</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="guru_kelas.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Guru</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <?php endif; ?>
+          <?php if ($role === 'admin' || $role === 'admin'): ?>
+          <li class="nav-item menu-open">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fas fa-chalkboard-teacher"></i>
+              <p>
+                Transaksi
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Jadwal</p>
                 </a>
               </li>
             </ul>
@@ -182,6 +207,14 @@
             </ul>
           </li>
           <?php endif; ?>
+          <li class="nav-item">
+            <a href="index.php?page=ganti_password" class="nav-link">
+              <i class="nav-icon fas fa-key"></i>
+              <p>
+                Ganti Password
+              </p>
+            </a>
+          </li>
           <li class="nav-item">
             <a href="logout.php" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>
