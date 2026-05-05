@@ -11,7 +11,7 @@
 <?php
 if(isset($_GET['action'])) {
     if($_GET['action'] == "hapus") {
-        $kd =$_GET['kd'];
+        $kd = $_GET['kd'];
         $query = mysqli_query($koneksi, "DELETE FROM mapel where kd_mapel = '$kd' ");
         if ($query) {
             echo '

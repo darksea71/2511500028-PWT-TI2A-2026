@@ -73,26 +73,33 @@ if (isset($_POST['username'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Query untuk memeriksa kecocokan username dan password
-    if (empty($username) || empty($password)) {
-        echo "Data tidak boleh kosong";
-    } else {
-        $query = mysqli_fetch_array(mysqli_query($koneksi, 
-            "SELECT * FROM users WHERE username = '$username' AND password='$password'"
+    if ($username == true) {
+        $userquery = mysqli_fetch_array(mysqli_query($koneksi, 
+            "SELECT * FROM users WHERE username = '$username'"
         ));
 
-        if ($query) {
-            $_SESSION['level'] = isset($query['Role']) ? $query['Role'] : 'admin';
-            $_SESSION['Username'] = $query['Username'];
+        // var_dump($userquery); die;
+        if ($userquery) {
+            if ($password == $userquery['Password']) {
+                $_SESSION['level'] = $userquery['Role'];
+                $_SESSION['Username'] = $userquery['Username'];
 
-            header("Location: index.php");
-            exit;
+                if ($userquery['Role'] == 'admin') {
+                    header("location:index.php");
+                } else if ($userquery['Role'] == 'guru' || $userquery['Role'] == 'siswa') {
+                    if ($userquery['Password'] == '1234') {
+                        header("Location: index.php?page=ganti_password");
+                    } else {
+                        header("location:index.php");
+                    }
+                }
+            }
         } else {
             echo '<div class="alert alert-danger alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
-                <h5><i class="icon fas fa-ban"></i> Alert!</h5>
-                Login gagal
-            </div>';
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+                    <h5><i class="icon fas fa-ban"></i> Alert!</h5>
+                    Login gagal
+                  </div>';
         }
     }
 }
