@@ -19,10 +19,10 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page dark-mode">
 <div class="login-box">
   <div class="login-logo">
-    <a href="#"><b>Campus</b> United</a>
+    <a href="#"><b>Sistem</b> Absensi</a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
@@ -80,14 +80,14 @@ if (isset($_POST['username'])) {
 
         // var_dump($userquery); die;
         if ($userquery) {
-            if ($password == $userquery['Password']) {
-                $_SESSION['level'] = $userquery['Role'];
-                $_SESSION['Username'] = $userquery['Username'];
+            if ($password == $userquery['password']) {
+                $_SESSION['level'] = $userquery['role'];
+                $_SESSION['Username'] = $userquery['username'];
 
-                if ($userquery['Role'] == 'admin') {
+                if ($userquery['role'] == 'admin') {
                     header("location:index.php");
-                } else if ($userquery['Role'] == 'guru' || $userquery['Role'] == 'siswa') {
-                    if ($userquery['Password'] == '1234') {
+                } else if ($userquery['role'] == 'guru' || $userquery['role'] == 'siswa') {
+                    if ($userquery['password'] == '1234') {
                         header("Location: index.php?page=ganti_password");
                     } else {
                         header("location:index.php");

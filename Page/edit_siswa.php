@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Edit Data Guru</h1>
+                <h1 class="m-0 text-dark">Edit Data Siswa</h1>
             </div>
         </div>
     </div>
@@ -10,29 +10,29 @@
 
     <?php
     $id = $_GET['id'];
-    $edit = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM guru WHERE id_guru='$id' "));
+    $edit = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM siswa WHERE id_siswa='$id' "));
 
     if(isset($_POST['tambah'])){
-        $id_guru = $_POST['id_guru'];
-        $nama_guru = $_POST['nama_guru'];
+        $id_siswa = $_POST['id_siswa'];
+        $nama_siswa = $_POST['nama_siswa'];
         $jenkel = $_POST['jenkel'];
-        $pend_terakhir = $_POST['pend_terakhir'];
+        $kelas = $_POST['kelas'];
         $alamat = $_POST['alamat'];
 
-        if (empty($nama_guru)) {
+        if (empty($nama_siswa)) {
             echo '<div class="alert alert-warning alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
             <h5><i class="icon fas fa-warning"></i> Peringatan </h5>
-            <h4>Nama Guru tidak boleh kosong!</h4></div>';
+            <h4>Nama Siswa tidak boleh kosong!</h4></div>';
         } else {
-            $insert = mysqli_query($koneksi, "UPDATE guru SET nama_guru='$nama_guru', jenkel='$jenkel', pend_terakhir='$pend_terakhir', alamat='$alamat' WHERE id_guru='$id_guru' ");
+            $insert = mysqli_query($koneksi, "UPDATE siswa SET nama_siswa='$nama_siswa', jenkel='$jenkel', kelas='$kelas', alamat='$alamat' WHERE id_siswa='$id_siswa' ");
             
             if ($insert) {
                 echo '<div class="alert alert-info alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                 <h5><i class="icon fas fa-info"></i> Info </h5>
                 <h4>Berhasil Disimpan</h4></div>';
-                echo '<meta http-equiv="refresh" content="1;url=index.php?page=guru">';
+                echo '<meta http-equiv="refresh" content="1;url=index.php?page=siswa">';
             } else {
                 echo '<div class="alert alert-danger alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -51,12 +51,16 @@
                     <div class="card-body p-2">
                         <form method="POST" action="">
                             <div class="form-group">
-                                <label for="id_guru">ID Guru</label>
-                                <input type="text" name="id_guru" value="<?= $edit['id_guru']; ?>" class="form-control" readonly>
+                                <label for="id_siswa">ID Siswa</label>
+                                <input type="text" name="id_siswa" value="<?= $edit['id_siswa']; ?>" class="form-control" readonly>
                             </div>
                             <div class="form-group">
-                                <label for="nama_guru">Nama Guru</label>
-                                <input type="text" name="nama_guru" value="<?= $edit['nama_guru']; ?>" id="nama_guru" placeholder="Nama Guru" class="form-control">
+                                <label for="nama_siswa">Nama Siswa</label>
+                                <input type="text" name="nama_siswa" value="<?= $edit['nama_siswa']; ?>" id="nama_siswa" placeholder="Nama Siswa" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="kelas">Kelas</label>
+                                <input type="text" name="kelas" value="<?= $edit['kelas']; ?>" id="kelas" placeholder="Kelas" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="jenkel">Jenis Kelamin</label>
@@ -69,8 +73,8 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="pend_terakhir">Pendidikan Terakhir</label>
-                                <input type="text" name="pend_terakhir" value="<?= $edit['pend_terakhir']; ?>" id="pend_terakhir" placeholder="Pendidikan Terakhir" class="form-control">
+                                <label for="kelas">Kelas</label>
+                                <input type="text" name="kelas" value="<?= $edit['kelas']; ?>" id="kelas" placeholder="Kelas" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="alamat">Alamat</label>

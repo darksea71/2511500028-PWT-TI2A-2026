@@ -11,8 +11,8 @@
 <?php
 if(isset($_GET['action'])) {
     if($_GET['action'] == "hapus") {
-        $kd = $_GET['kd'];
-        $query = mysqli_query($koneksi, "DELETE FROM guru where kd_guru = '$kd' ");
+        $id = $_GET['id'];
+        $query = mysqli_query($koneksi, "DELETE FROM guru where id_guru = '$id' ");
         if ($query) {
             echo '
             <div class="alert alert-warning alert-dismissible">
@@ -31,12 +31,13 @@ if(isset($_GET['action'])) {
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>NO</th>
-                        <th>Kd Guru</th>
+                        <th>No</th>
+                        <th>ID Guru</th>
                         <th>Nama Guru</th>
+                        <th>Mapel</th>
                         <th>Jenis Kelamin</th>
                         <th>Pendidikan Terakhir</th>
-                        <th>No HP</th>
+                        <th>Alamat</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -49,16 +50,17 @@ if(isset($_GET['action'])) {
                 <tbody>
                     <tr>
                         <td><?= $no; ?></td>
-                        <td><?= $result['kd_guru']; ?></td>
-                        <td><?= $result['nm_guru']; ?></td>
+                        <td><?= $result['id_guru']; ?></td>
+                        <td><?= $result['nama_guru']; ?></td>
+                        <td><?= $result['mapel']; ?></td>
                         <td><?= $result['jenkel']; ?></td>
                         <td><?= $result['pend_terakhir']; ?></td>
-                        <td><?= $result['hp']; ?></td>
+                        <td><?= $result['alamat']; ?></td>
                         <td>
-                            <a href="index.php?page=guru&action=hapus&kd=<?= $result['kd_guru'] ?>" title="">
+                            <a href="index.php?page=guru&action=hapus&id=<?= $result['id_guru'] ?>" title="">
                                 <span class="badge badge-danger">Hapus</span>
                             </a>
-                            <a href="index.php?page=edit_guru&kd=<?= $result['kd_guru'] ?>" title="">
+                            <a href="index.php?page=edit_guru&id=<?= $result['id_guru'] ?>" title="">
                                 <span class="badge badge-warning">Edit</span>
                             </a>
                         </td>

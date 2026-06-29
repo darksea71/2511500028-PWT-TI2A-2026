@@ -2,7 +2,7 @@
     $db_host = "localhost";
     $db_user = "root";
     $db_pass = "";
-    $db_name = "jadwal";
+    $db_name = "absensi_sekolah";
     // MENGECEK KONEKSI
     $koneksi = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
     

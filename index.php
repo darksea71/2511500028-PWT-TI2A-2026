@@ -19,11 +19,11 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini layout-fixed dark-mode">
 <div class="wrapper">
 
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+  <nav class="main-header navbar navbar-expand navbar-black navbar-dark">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -106,52 +106,27 @@
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-chalkboard-teacher"></i>
               <p>
-                Master
+                Admin
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="index.php?page=mapel" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Mata Pelajaran</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="index.php?page=kelas" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Kelas</p>
-                </a>
-              </li>
               <li class="nav-item">
                 <a href="index.php?page=guru" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Guru</p>
+                  <p>Data Guru</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="index.php?page=ekstra_2511500028" class="nav-link">
+                <a href="index.php?page=siswa" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Ektrakurikuler</p>
+                  <p>Data Siswa</p>
                 </a>
               </li>
-            </ul>
-          </li>
-          <?php endif; ?>
-          <?php if ($role === 'admin' || $role === 'admin'): ?>
-          <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-chalkboard-teacher"></i>
-              <p>
-                Transaksi
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="index.php?page=rekap_absensi" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Jadwal</p>
+                  <p>Rekap Absensi</p>
                 </a>
               </li>
             </ul>
@@ -162,52 +137,15 @@
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-chalkboard-teacher"></i>
               <p>
-                Akses Guru
+                Guru
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="guru_profil.php" class="nav-link">
+                <a href="index.php?page=absensi" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Profil</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="guru_kelas.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Kelas</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="guru_jadwal.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Jadwal</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <?php endif; ?>
-          <?php if ($role === 'siswa' || $role === 'admin'): ?>
-          <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-user-graduate"></i>
-              <p>
-                Akses Siswa
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="siswa_profil.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Profil</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="siswa_jadwal.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Jadwal</p>
+                  <p>Absensi</p>
                 </a>
               </li>
             </ul>
@@ -263,8 +201,6 @@
           <div class="col-lg-12">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-
                 <p class="card-text">
                   <?php
                     if (isset($_GET['page'])) {
